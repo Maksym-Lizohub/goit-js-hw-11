@@ -9,6 +9,7 @@ const refs = {
   form: document.querySelector('.search-form'),
   buttonLoad: document.querySelector('.load-more'),
   gallery: document.querySelector('.gallery'),
+  searchBtn: document.querySelector('.search'),
 };
 
 const KEY = '27622136-3e895bd2b32539c57254a4c60';
@@ -52,9 +53,23 @@ function resetGallery() {
   refs.gallery.innerHTML = '';
 }
 
+refs.searchBtn.setAttribute('disabled', '');
+
+refs.form.addEventListener('input', event => {
+  event.preventDefault();
+  searchQuevery = event.currentTarget.elements.searchQuery.value;
+  if (!searchQuevery.length) {
+    Notify.warning('Please type something');
+  } else {
+    refs.searchBtn.removeAttribute('disabled');
+  }
+});
+
 refs.form.addEventListener('submit', event => {
   event.preventDefault();
   searchQuevery = event.currentTarget.elements.searchQuery.value;
+
+  console.dir(searchQuevery);
   resetPage();
   resetGallery();
   fetchApi(searchQuevery, page)
