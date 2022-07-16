@@ -69,7 +69,6 @@ refs.form.addEventListener('submit', event => {
   event.preventDefault();
   searchQuevery = event.currentTarget.elements.searchQuery.value;
 
-  console.dir(searchQuevery);
   resetPage();
   resetGallery();
   fetchApi(searchQuevery, page)
